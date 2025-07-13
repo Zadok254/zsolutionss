@@ -1,1 +1,377 @@
-// consultations.html placeholder
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organic Agribusiness Consultation | Z Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom colors */
+        .text-leaf-500 { color: #5d8032; }
+        .bg-leaf-500 { background-color: #5d8032; }
+        .hover\:bg-leaf-600:hover { background-color: #4a6928; }
+        .border-leaf-500 { border-color: #5d8032; }
+        .focus\:ring-leaf-500:focus { --tw-ring-color: #5d8032; }
+        
+        /* Custom animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fadeInUp {
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+        
+        /* Floating animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating-img {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* Custom checkbox */
+        .custom-checkbox {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #5d8032;
+            border-radius: 4px;
+            outline: none;
+            transition: all 0.2s;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .custom-checkbox:checked {
+            background-color: #5d8032;
+        }
+        
+        .custom-checkbox:checked::after {
+            content: "\2713";
+            position: absolute;
+            color: white;
+            font-size: 14px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        /* Organic pattern background */
+        .organic-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23e2f3d0' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        /* Leaf decoration */
+        .leaf-decoration {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%235d8032'%3E%3Cpath d='M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8z'/%3E%3Cpath d='M12 6c-3.3 0-6 2.7-6 6s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6zm0 10c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .leaf-decoration.top-left {
+            top: 0;
+            left: 0;
+            transform: rotate(45deg);
+        }
+        
+        .leaf-decoration.bottom-right {
+            bottom: 0;
+            right: 0;
+            transform: rotate(-45deg);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 organic-pattern">
+    <section id="consultation" class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative overflow-hidden">
+        <!-- Decorative leaves -->
+        <div class="leaf-decoration top-left hidden lg:block"></div>
+        <div class="leaf-decoration bottom-right hidden lg:block"></div>
+        
+        <div class="text-center mb-16 relative z-10">
+            <span class="inline-block mb-4 text-leaf-500 font-semibold uppercase tracking-wider">Expert Guidance</span>
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">Organic Agribusiness Consultation</h2>
+            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+                Tailored solutions for sustainable farming and organic food production from our team of agribusiness specialists.
+            </p>
+        </div>
+        
+        <div class="flex flex-col lg:flex-row gap-12 items-center relative z-10">
+            <!-- Consultation Form -->
+            <div class="w-full lg:w-1/2 bg-white rounded-xl shadow-lg overflow-hidden p-6 md:p-8 animate-fadeInUp border-l-4 border-leaf-500">
+                <h3 class="text-2xl font-bold text-gray-900 mb-6">Schedule Your Consultation</h3>
+                
+                <form id="consultationForm" class="space-y-6">
+                    <div>
+                        <label for="name" class="block text-gray-700 font-medium mb-2">Full Name <span class="text-leaf-500">*</span></label>
+                        <input type="text" id="name" name="name" required
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-leaf-500 transition-all">
+                    </div>
+                    
+                    <div>
+                        <label for="email" class="block text-gray-700 font-medium mb-2">Email Address <span class="text-leaf-500">*</span></label>
+                        <input type="email" id="email" name="email" required
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-leaf-500 transition-all">
+                    </div>
+                    
+                    <div>
+                        <label for="phone" class="block text-gray-700 font-medium mb-2">Phone Number</label>
+                        <input type="tel" id="phone" name="phone"
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-leaf-500 transition-all">
+                    </div>
+                    
+                    <div>
+                        <label for="operation" class="block text-gray-700 font-medium mb-2">Type of Operation <span class="text-leaf-500">*</span></label>
+                        <select id="operation" name="operation" required
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-leaf-500 transition-all">
+                            <option value="">Select your operation</option>
+                            <option value="farm">Organic Farm</option>
+                            <option value="distributor">Organic Food Distributor</option>
+                            <option value="processor">Organic Food Processor</option>
+                            <option value="retailer">Organic Retailer</option>
+                            <option value="startup">Agribusiness Startup</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label for="service" class="block text-gray-700 font-medium mb-2">Consultation Service <span class="text-leaf-500">*</span></label>
+                        <select id="service" name="service" required
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-leaf-500 transition-all">
+                            <option value="">Select a service</option>
+                            <option value="certification">Organic Certification Guidance</option>
+                            <option value="marketing">Organic Product Marketing</option>
+                            <option value="supply-chain">Sustainable Supply Chain</option>
+                            <option value="soil-management">Soil Health Management</option>
+                            <option value="finance">Agribusiness Financing</option>
+                            <option value="technology">Agri-Tech Solutions</option>
+                            <option value="export">Organic Export Strategy</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2">Preferred Contact Method</label>
+                        <div class="grid grid-cols-2 gap-4">
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="contact_method" value="video" class="form-radio h-5 w-5 text-leaf-500 border-gray-300 focus:ring-leaf-500">
+                                <span class="ml-2">Video Call</span>
+                            </label>
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="contact_method" value="phone" class="form-radio h-5 w-5 text-leaf-500 border-gray-300 focus:ring-leaf-500">
+                                <span class="ml-2">Phone Call</span>
+                            </label>
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="contact_method" value="email" class="form-radio h-5 w-5 text-leaf-500 border-gray-300 focus:ring-leaf-500">
+                                <span class="ml-2">Email</span>
+                            </label>
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="contact_method" value="onsite" class="form-radio h-5 w-5 text-leaf-500 border-gray-300 focus:ring-leaf-500">
+                                <span class="ml-2">On-Site Visit</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="message" class="block text-gray-700 font-medium mb-2">Tell Us About Your Project</label>
+                        <textarea id="message" name="message" rows="4"
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-leaf-500 transition-all"></textarea>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <input type="checkbox" id="consent" name="consent" required class="custom-checkbox mr-3 mt-1">
+                        <label for="consent" class="text-gray-700 text-sm">I agree to the <a href="#" class="text-leaf-500 hover:underline">terms of service</a> and <a href="#" class="text-leaf-500 hover:underline">privacy policy</a>.</label>
+                    </div>
+                    
+                    <button type="submit"
+                            class="w-full bg-leaf-500 hover:bg-leaf-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-leaf-500 focus:ring-offset-2">
+                        Request Expert Consultation
+                        <i class="fas fa-leaf ml-2"></i>
+                    </button>
+                </form>
+                
+                <!-- Success Message (Hidden by default) -->
+                <div id="successMessage" class="hidden mt-6 p-4 bg-green-100 text-green-800 rounded-lg border border-green-200">
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle text-green-500 mr-2 text-xl"></i>
+                        <h3 class="font-semibold">Thank you for your interest in our consultation services!</h3>
+                    </div>
+                    <p class="mt-2 text-sm">Our organic agribusiness specialist will review your information and contact you within 24 hours to schedule your consultation.</p>
+                </div>
+            </div>
+            
+            <!-- Consultation Info -->
+            <div class="w-full lg:w-1/2 animate-fadeInUp" style="animation-delay: 0.2s;">
+                <div class="relative mb-8 lg:mb-12">
+                    <img src="https://images.unsplash.com/photo-1585011650347-c59dbef5a6d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                         alt="Organic farm consultation"
+                         class="rounded-xl shadow-lg floating-img w-full h-auto max-h-[500px] object-cover object-center">
+                    
+                    <div class="absolute -bottom-6 -right-6 bg-white p-6 rounded-xl shadow-lg w-4/5 hidden md:block border-t-4 border-leaf-500">
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Organic Agribusiness Expertise</h3>
+                        <ul class="space-y-2">
+                            <li class="flex items-start">
+                                <i class="fas fa-seedling text-leaf-500 mt-1 mr-3"></i>
+                                <span>Certified organic farming specialists</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-globe-americas text-leaf-500 mt-1 mr-3"></i>
+                                <span>Global organic certification knowledge</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-chart-line text-leaf-500 mt-1 mr-3"></i>
+                                <span>Market analysis for organic products</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-hand-holding-heart text-leaf-500 mt-1 mr-3"></i>
+                                <span>Sustainable business growth strategies</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-leaf-500">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">What to Expect</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="bg-leaf-500 bg-opacity-10 p-2 rounded-full mr-4">
+                                <i class="fas fa-calendar-check text-leaf-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Initial Assessment</h4>
+                                <p class="text-gray-600 text-sm">We'll analyze your current operations and goals to tailor our approach.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-leaf-500 bg-opacity-10 p-2 rounded-full mr-4">
+                                <i class="fas fa-lightbulb text-leaf-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Strategic Planning</h4>
+                                <p class="text-gray-600 text-sm">Receive actionable insights for your organic agribusiness growth.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-leaf-500 bg-opacity-10 p-2 rounded-full mr-4">
+                                <i class="fas fa-file-alt text-leaf-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Detailed Report</h4>
+                                <p class="text-gray-600 text-sm">Get a comprehensive follow-up with recommendations.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-leaf-500 bg-opacity-10 p-2 rounded-full mr-4">
+                                <i class="fas fa-headset text-leaf-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Ongoing Support</h4>
+                                <p class="text-gray-600 text-sm">Continued guidance as you implement our recommendations.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-8 grid grid-cols-2 gap-4">
+                    <div class="text-center p-4 bg-white rounded-lg shadow-md border-t-4 border-leaf-500">
+                        <div class="text-leaf-500 text-3xl mb-2">
+                            <i class="fas fa-tractor"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-900">200+</h4>
+                        <p class="text-gray-600 text-sm">Organic Farms Helped</p>
+                    </div>
+                    <div class="text-center p-4 bg-white rounded-lg shadow-md border-t-4 border-leaf-500">
+                        <div class="text-leaf-500 text-3xl mb-2">
+                            <i class="fas fa-medal"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-900">98%</h4>
+                        <p class="text-gray-600 text-sm">Successful Certifications</p>
+                    </div>
+                    <div class="text-center p-4 bg-white rounded-lg shadow-md border-t-4 border-leaf-500">
+                        <div class="text-leaf-500 text-3xl mb-2">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-900">25+</h4>
+                        <p class="text-gray-600 text-sm">Organic Specialists</p>
+                    </div>
+                    <div class="text-center p-4 bg-white rounded-lg shadow-md border-t-4 border-leaf-500">
+                        <div class="text-leaf-500 text-3xl mb-2">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-900">12</h4>
+                        <p class="text-gray-600 text-sm">Markets Served</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('consultationForm');
+            const successMessage = document.getElementById('successMessage');
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Simulate form submission
+                setTimeout(() => {
+                    // Hide form and show success message
+                    form.classList.add('hidden');
+                    successMessage.classList.remove('hidden');
+                    successMessage.classList.add('animate-fadeInUp');
+                    
+                    // Reset form after a delay (for demo purposes)
+                    setTimeout(() => {
+                        form.reset();
+                        form.classList.remove('hidden');
+                        successMessage.classList.add('hidden');
+                    }, 10000);
+                }, 1000);
+            });
+            
+            // Add animation to elements as they come into view
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fadeInUp');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            document.querySelectorAll('#consultation div:not(.hidden)').forEach((el, index) => {
+                setTimeout(() => {
+                    observer.observe(el);
+                }, index * 100);
+            });
+            
+            // Custom select styling
+            const selects = document.querySelectorAll('select');
+            selects.forEach(select => {
+                select.addEventListener('focus', function() {
+                    this.parentNode.classList.add('ring-2', 'ring-leaf-500', 'ring-opacity-50', 'rounded-lg');
+                });
+                select.addEventListener('blur', function() {
+                    this.parentNode.classList.remove('ring-2', 'ring-leaf-500', 'ring-opacity-50', 'rounded-lg');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -192,251 +192,252 @@
     </section>
 
     <!-- Checkout Section -->
-    <section id="checkout" class="py-24 bg-gray-50 hidden">
-        <div class="container mx-auto px-6 max-w-4xl">
-            <div class="flex justify-center mb-12">
-                <div class="w-20 h-1 bg-green-600 rounded-full"></div>
-            </div>
-                        
-            <div class="flex flex-col md:flex-row">
-                <!-- Checkout Steps Indicator -->
-                <div class="md:w-1/4 md:pr-8 mb-8 md:mb-0">
-                    <div class="space-y-6">
-                        <div class="flex items-center space-x-4">
-                            <div class="w-8 h-8 rounded-full bg-green-700 flex items-center justify-center text-white font-medium">1</div>
-                            <div>
-                                <p class="text-xs text-gray-400">STEP 1</p>
-                                <p class="text-sm font-medium">Shopping Cart</p>
-                            </div>
+<!-- Checkout Section -->
+<section id="checkout" class="py-24 bg-gray-50 hidden">
+    <div class="container mx-auto px-6 max-w-4xl">
+        <div class="flex justify-center mb-12">
+            <div class="w-20 h-1 bg-green-600 rounded-full"></div>
+        </div>
+                    
+        <div class="flex flex-col md:flex-row">
+            <!-- Checkout Steps Indicator -->
+            <div class="md:w-1/4 md:pr-8 mb-8 md:mb-0">
+                <div class="space-y-6">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-8 h-8 rounded-full bg-green-700 flex items-center justify-center text-white font-medium">1</div>
+                        <div>
+                            <p class="text-xs text-gray-400">STEP 1</p>
+                            <p class="text-sm font-medium">Shopping Cart</p>
                         </div>
-                                                
-                        <div class="flex items-center space-x-4">
-                            <div class="w-8 h-8 rounded-full bg-green-700 flex items-center justify-center text-white font-medium">2</div>
-                            <div>
-                                <p class="text-xs text-gray-400">STEP 2</p>
-                                <p class="text-sm font-medium text-green-700">Payment Method</p>
-                            </div>
+                    </div>
+                                            
+                    <div class="flex items-center space-x-4">
+                        <div class="w-8 h-8 rounded-full bg-green-700 flex items-center justify-center text-white font-medium">2</div>
+                        <div>
+                            <p class="text-xs text-gray-400">STEP 2</p>
+                            <p class="text-sm font-medium text-green-700">Payment Method</p>
                         </div>
+                    </div>
 
-                        <div class="flex items-center space-x-4">
-                            <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 font-medium">3</div>
-                            <div>
-                                <p class="text-xs text-gray-400">STEP 3</p>
-                                <p class="text-sm font-medium text-gray-400">Order Confirmation</p>
-                            </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 font-medium">3</div>
+                        <div>
+                            <p class="text-xs text-gray-400">STEP 3</p>
+                            <p class="text-sm font-medium text-gray-400">Order Confirmation</p>
                         </div>
                     </div>
                 </div>
-                                
-                <!-- Checkout Form -->
-                <div class="md:w-3/4">
-                    <h2 class="text-3xl font-bold text-gray-900 mb-8">Complete Your Order</h2>
-                                        
-                    <form class="space-y-6">
-                        <div class="bg-white p-8 rounded-xl shadow-sm">
-                            <h3 class="text-lg font-semibold text-gray-800 mb-6 pb-4 border-b border-gray-100">Contact Information</h3>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
-                                    <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-green-600" required>
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
-                                    <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-green-600" required>
-                                </div>
-                                <div class="md:col-span-2">
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
-                                    <input type="email" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-green-600" required>
-                                </div>
+            </div>
+                            
+            <!-- Checkout Form -->
+            <div class="md:w-3/4">
+                <h2 class="text-3xl font-bold text-gray-900 mb-8">Complete Your Order</h2>
+                                            
+                <form id="checkout-form" class="space-y-6">
+                    <div class="bg-white p-8 rounded-xl shadow-sm">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-6 pb-4 border-b border-gray-100">Contact Information</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">First Name *</label>
+                                <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-green-600" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Last Name *</label>
+                                <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-green-600" required>
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                                <input type="email" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-green-600" required>
                             </div>
                         </div>
-                                                
-                        <div class="bg-white p-8 rounded-xl shadow-sm">
-                            <h3 class="text-lg font-semibold text-gray-800 mb-6 pb-4 border-b border-gray-100">Shipping Address</h3>
-                            <div class="space-y-6">
+                    </div>
+                                                    
+                    <div class="bg-white p-8 rounded-xl shadow-sm">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-6 pb-4 border-b border-gray-100">Shipping Address</h3>
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Address *</label>
+                                <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-green-600" required>
+                            </div>
+                                                                    
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Address</label>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">City *</label>
                                     <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-green-600" required>
                                 </div>
-                                                                
-                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">City</label>
-                                        <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-green-600" required>
-                                    </div>
-                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Country</label>
-                                        <select class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-green-600 select-arrow" required>
-                                            <option value="">Select Country</option>
-                                            <option value="US">United States</option>
-                                            <option value="UK">United Kingdom</option>
-                                            <option value="CA">Canada</option>
-                                            <option value="AU">Australia</option>
-                                            <option value="KE" selected>Kenya</option>
-                                            <option value="NG">Nigeria</option>
-                                            <option value="ZA">South Africa</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Postal Code</label>
-                                        <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-green-600" required>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                                                
-                        <div class="bg-white p-8 rounded-xl shadow-sm">
-                            <h3 class="text-lg font-semibold text-gray-800 mb-6 pb-4 border-b border-gray-100">Payment Method</h3>
-                            <div class="space-y-4">
-                                <div id="credit-card-option" class="payment-method rounded-lg border border-gray-200 p-4 hover:border-green-500 cursor-pointer selected">
-                                    <div class="flex items-center space-x-4">
-                                        <input type="radio" name="payment" id="credit-card" class="h-4 w-4 text-green-600 focus:ring-green-500" checked>
-                                        <label for="credit-card" class="flex-1">
-                                            <div class="flex justify-between items-center">
-                                                <span class="text-sm font-medium text-gray-700">Credit / Debit Card</span>
-                                                <div class="flex space-x-2">
-                                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/visa/visa-original.svg" class="h-6" alt="Visa">
-                                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mastercard/mastercard-original.svg" class="h-6" alt="Mastercard">
-                                                </div>
-                                            </div>
-                                        </label>
-                                    </div>
-                                </div>
-                                                                
-                                <div id="paypal-option" class="payment-method rounded-lg border border-gray-200 p-4 hover:border-green-500 cursor-pointer">
-                                    <div class="flex items-center space-x-4">
-                                        <input type="radio" name="payment" id="paypal" class="h-4 w-4 text-green-600 focus:ring-green-500">
-                                        <label for="paypal" class="flex-1">
-                                            <div class="flex justify-between items-center">
-                                                <span class="text-sm font-medium text-gray-700">PayPal</span>
-                                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/paypal/paypal-original.svg" class="h-6" alt="PayPal">
-                                            </div>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div id="mpesa-option" class="payment-method rounded-lg border border-gray-200 p-4 hover:border-green-500 cursor-pointer">
-                                    <div class="flex items-center space-x-4">
-                                        <input type="radio" name="payment" id="mpesa" class="h-4 w-4 text-green-600 focus:ring-green-500">
-                                        <label for="mpesa" class="flex-1">
-                                            <div class="flex justify-between items-center">
-                                                <span class="text-sm font-medium text-gray-700">M-Pesa</span>
-                                                <img src="https://upload.wikimedia.org/wikipedia/commons/1/15/M-PESA_LOGO-01.svg" class="h-6" alt="M-Pesa">
-                                            </div>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div id="crypto-option" class="payment-method rounded-lg border border-gray-200 p-4 hover:border-green-500 cursor-pointer">
-                                    <div class="flex items-center space-x-4">
-                                        <input type="radio" name="payment" id="crypto" class="h-4 w-4 text-green-600 focus:ring-green-500">
-                                        <label for="crypto" class="flex-1">
-                                            <div class="flex justify-between items-center">
-                                                <span class="text-sm font-medium text-gray-700">Cryptocurrency</span>
-                                                <div class="flex space-x-2">
-                                                    <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.svg" class="h-6" alt="Bitcoin">
-                                                    <img src="https://cryptologos.cc/logos/ethereum-eth-logo.svg" class="h-6" alt="Ethereum">
-                                                </div>
-                                            </div>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div id="bank-transfer-option" class="payment-method rounded-lg border border-gray-200 p-4 hover:border-green-500 cursor-pointer">
-                                    <div class="flex items-center space-x-4">
-                                        <input type="radio" name="payment" id="bank-transfer" class="h-4 w-4 text-green-600 focus:ring-green-500">
-                                        <label for="bank-transfer" class="flex-1">
-                                            <div class="flex justify-between items-center">
-                                                <span class="text-sm font-medium text-gray-700">Bank Transfer</span>
-                                                <img src="https://cdn-icons-png.flaticon.com/512/2875/2875334.png" class="h-6" alt="Bank">
-                                            </div>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                                                
-                            <div id="credit-card-details" class="mt-6 space-y-4">
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Card Number</label>
-                                    <input type="text" placeholder="1234 5678 9012 3456" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-green-600" required>
-                                </div>
-                                                                
-                                <div class="grid grid-cols-2 gap-6">
-                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Expiration Date</label>
-                                        <input type="text" placeholder="MM/YY" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-green-600" required>
-                                    </div>
-                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Security Code</label>
-                                        <input type="text" placeholder="CVV" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-green-600" required>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div id="mpesa-details" class="mt-6 space-y-4 hidden">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
-                                    <input type="text" placeholder="e.g., 2547XXXXXXXX" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-green-600">
-                                </div>
-                                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
-                                    <div class="flex">
-                                        <div class="flex-shrink-0">
-                                            <i class="fas fa-info-circle text-yellow-400"></i>
-                                        </div>
-                                        <div class="ml-3">
-                                            <p class="text-sm text-yellow-700">
-                                                You'll receive an M-Pesa prompt on your phone to complete payment.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div id="crypto-details" class="mt-6 space-y-4 hidden">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Select Cryptocurrency</label>
-                                    <select class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-green-600 select-arrow">
-                                        <option value="">Select Coin</option>
-                                        <option value="BTC">Bitcoin (BTC)</option>
-                                        <option value="ETH">Ethereum (ETH)</option>
-                                        <option value="USDT">Tether (USDT)</option>
-                                        <option value="SOL">Solana (SOL)</option>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Country *</label>
+                                    <select class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-green-600 select-arrow" required>
+                                        <option value="">Select Country</option>
+                                        <option value="US">United States</option>
+                                        <option value="UK">United Kingdom</option>
+                                        <option value="CA">Canada</option>
+                                        <option value="AU">Australia</option>
+                                        <option value="KE" selected>Kenya</option>
+                                        <option value="NG">Nigeria</option>
+                                        <option value="ZA">South Africa</option>
                                     </select>
                                 </div>
                                 <div>
-                                    <div class="bg-gray-800 rounded-lg p-4 text-center">
-                                        <div class="flex justify-center mb-4">
-                                            <img src="https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=bitcoin:3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5" alt="QR Code" class="h-40 w-40">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Postal Code *</label>
+                                    <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-green-600" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                                    
+                    <div class="bg-white p-8 rounded-xl shadow-sm">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-6 pb-4 border-b border-gray-100">Payment Method *</h3>
+                        <div class="space-y-4">
+                            <div id="credit-card-option" class="payment-method rounded-lg border border-gray-200 p-4 hover:border-green-500 cursor-pointer selected">
+                                <div class="flex items-center space-x-4">
+                                    <input type="radio" name="payment" id="credit-card" class="h-4 w-4 text-green-600 focus:ring-green-500" checked required>
+                                    <label for="credit-card" class="flex-1">
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm font-medium text-gray-700">Credit / Debit Card</span>
+                                            <div class="flex space-x-2">
+                                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/visa/visa-original.svg" class="h-6" alt="Visa">
+                                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mastercard/mastercard-original.svg" class="h-6" alt="Mastercard">
+                                            </div>
                                         </div>
-                                        <p class="text-xs text-gray-400 mb-2">Scan or copy the address below:</p>
-                                        <div class="bg-gray-700 rounded p-2 flex items-center justify-between">
-                                            <p class="text-sm text-white font-mono truncate">3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
-                                            <button class="text-gray-400 hover:text-white ml-2">
-                                                <i class="far fa-copy"></i>
-                                            </button>
+                                    </label>
+                                </div>
+                            </div>
+                                                                
+                            <div id="paypal-option" class="payment-method rounded-lg border border-gray-200 p-4 hover:border-green-500 cursor-pointer">
+                                <div class="flex items-center space-x-4">
+                                    <input type="radio" name="payment" id="paypal" class="h-4 w-4 text-green-600 focus:ring-green-500">
+                                    <label for="paypal" class="flex-1">
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm font-medium text-gray-700">PayPal</span>
+                                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/paypal/paypal-original.svg" class="h-6" alt="PayPal">
                                         </div>
-                                        <p class="text-xs text-gray-400 mt-2">Your crypto payment will be automatically verified.</p>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div id="mpesa-option" class="payment-method rounded-lg border border-gray-200 p-4 hover:border-green-500 cursor-pointer">
+                                <div class="flex items-center space-x-4">
+                                    <input type="radio" name="payment" id="mpesa" class="h-4 w-4 text-green-600 focus:ring-green-500">
+                                    <label for="mpesa" class="flex-1">
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm font-medium text-gray-700">M-Pesa</span>
+                                            <img src="https://upload.wikimedia.org/wikipedia/commons/1/15/M-PESA_LOGO-01.svg" class="h-6" alt="M-Pesa">
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div id="crypto-option" class="payment-method rounded-lg border border-gray-200 p-4 hover:border-green-500 cursor-pointer">
+                                <div class="flex items-center space-x-4">
+                                    <input type="radio" name="payment" id="crypto" class="h-4 w-4 text-green-600 focus:ring-green-500">
+                                    <label for="crypto" class="flex-1">
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm font-medium text-gray-700">Cryptocurrency</span>
+                                            <div class="flex space-x-2">
+                                                <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.svg" class="h-6" alt="Bitcoin">
+                                                <img src="https://cryptologos.cc/logos/ethereum-eth-logo.svg" class="h-6" alt="Ethereum">
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div id="bank-transfer-option" class="payment-method rounded-lg border border-gray-200 p-4 hover:border-green-500 cursor-pointer">
+                                <div class="flex items-center space-x-4">
+                                    <input type="radio" name="payment" id="bank-transfer" class="h-4 w-4 text-green-600 focus:ring-green-500">
+                                    <label for="bank-transfer" class="flex-1">
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm font-medium text-gray-700">Bank Transfer</span>
+                                            <img src="https://cdn-icons-png.flaticon.com/512/2875/2875334.png" class="h-6" alt="Bank">
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                                                    
+                        <div id="credit-card-details" class="mt-6 space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Card Number *</label>
+                                <input type="text" placeholder="1234 5678 9012 3456" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-green-600" required>
+                            </div>
+                                                                
+                            <div class="grid grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Expiration Date *</label>
+                                    <input type="text" placeholder="MM/YY" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-green-600" required>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Security Code *</label>
+                                    <input type="text" placeholder="CVV" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-green-600" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="mpesa-details" class="mt-6 space-y-4 hidden">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
+                                <input type="text" placeholder="e.g., 2547XXXXXXXX" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-green-600">
+                            </div>
+                            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+                                <div class="flex">
+                                    <div class="flex-shrink-0">
+                                        <i class="fas fa-info-circle text-yellow-400"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-sm text-yellow-700">
+                                            You'll receive an M-Pesa prompt on your phone to complete payment.
+                                        </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                                                
-                        <div class="flex items-center">
-                            <input id="terms" type="checkbox" class="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded" required>
-                            <label for="terms" class="ml-2 block text-sm text-gray-700">
-                                I agree to the <a href="#" class="text-green-600 hover:text-green-700">Terms and Conditions</a> and <a href="#" class="text-green-600 hover:text-green-700">Privacy Policy</a>
-                            </label>
+
+                        <div id="crypto-details" class="mt-6 space-y-4 hidden">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Select Cryptocurrency *</label>
+                                <select class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-green-600 select-arrow">
+                                    <option value="">Select Coin</option>
+                                    <option value="BTC">Bitcoin (BTC)</option>
+                                    <option value="ETH">Ethereum (ETH)</option>
+                                    <option value="USDT">Tether (USDT)</option>
+                                    <option value="SOL">Solana (SOL)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <div class="bg-gray-800 rounded-lg p-4 text-center">
+                                    <div class="flex justify-center mb-4">
+                                        <img src="https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=bitcoin:3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5" alt="QR Code" class="h-40 w-40">
+                                    </div>
+                                    <p class="text-xs text-gray-400 mb-2">Scan or copy the address below:</p>
+                                    <div class="bg-gray-700 rounded p-2 flex items-center justify-between">
+                                        <p class="text-sm text-white font-mono truncate">3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                        <button class="text-gray-400 hover:text-white ml-2">
+                                            <i class="far fa-copy"></i>
+                                        </button>
+                                    </div>
+                                    <p class="text-xs text-gray-400 mt-2">Your crypto payment will be automatically verified.</p>
+                                </div>
+                            </div>
                         </div>
-                                                
-                        <button type="submit" class="btn-primary text-white w-full py-5 rounded-full font-medium text-lg flex items-center justify-center">
-                            Complete Order
-                            <i class="fas fa-chevron-right ml-2 text-sm"></i>
-                        </button>
-                    </form>
-                </div>
+                    </div>
+                                                    
+                    <div class="flex items-center">
+                        <input id="terms" type="checkbox" class="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded" required>
+                        <label for="terms" class="ml-2 block text-sm text-gray-700">
+                            I agree to the <a href="#" class="text-green-600 hover:text-green-700">Terms and Conditions</a> and <a href="#" class="text-green-600 hover:text-green-700">Privacy Policy</a> *
+                        </label>
+                    </div>
+                                                    
+                    <button type="submit" class="btn-primary text-white w-full py-5 rounded-full font-medium text-lg flex items-center justify-center">
+                        Complete Order
+                        <i class="fas fa-chevron-right ml-2 text-sm"></i>
+                    </button>
+                </form>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Order Confirmation Section -->
     <section id="confirmation" class="py-24 bg-gray-50 hidden">
@@ -720,62 +721,83 @@
         });
 
         // Form submission for checkout
-        document.querySelector('form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Generate a random order number
-            const randomOrderNumber = '#' + Math.floor(100000 + Math.random() * 900000);
-            
-            // Get current date
-            const today = new Date();
-            const options = { year: 'numeric', month: 'long', day: 'numeric' };
-            const formattedDate = today.toLocaleDateString('en-US', options);
-            
-            // Get selected payment method
-            const selectedPayment = document.querySelector('input[name="payment"]:checked').id;
-            let paymentMethodDisplay = '';
-            
-            switch(selectedPayment) {
-                case 'credit-card':
-                    paymentMethodDisplay = 'Credit / Debit Card';
-                    break;
-                case 'paypal':
-                    paymentMethodDisplay = 'PayPal';
-                    break;
-                case 'mpesa':
-                    paymentMethodDisplay = 'M-Pesa';
-                    break;
-                case 'crypto':
-                    paymentMethodDisplay = 'Cryptocurrency';
-                    break;
-                case 'bank-transfer':
-                    paymentMethodDisplay = 'Bank Transfer';
-                    break;
-                default:
-                    paymentMethodDisplay = 'Unknown';
-            }
-            
-            // Update confirmation details
-            orderNumber.textContent = randomOrderNumber;
-            orderDate.textContent = formattedDate;
-            orderTotal.textContent = cartTotal.textContent;
-            orderPaymentMethod.textContent = paymentMethodDisplay;
-            
-            // Show confirmation and hide checkout
-            checkoutSection.classList.add('hidden');
-            confirmationSection.classList.remove('hidden');
-            
-            // Clear the cart
-            cartItems.length = 0;
-            localStorage.removeItem('cartItems');
-            renderCart();
-            
-            // Scroll to confirmation
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
+       // Replace the existing form submission handler with this code
+document.querySelector('form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Validate form fields
+    const firstName = document.querySelector('input[type="text"]:nth-of-type(1)').value;
+    const lastName = document.querySelector('input[type="text"]:nth-of-type(2)').value;
+    const email = document.querySelector('input[type="email"]').value;
+    const address = document.querySelectorAll('input[type="text"]')[3].value;
+    const city = document.querySelectorAll('input[type="text"]')[4].value;
+    const country = document.querySelector('select').value;
+    const postalCode = document.querySelectorAll('input[type="text"]')[5].value;
+    const termsChecked = document.getElementById('terms').checked;
+
+    if (!firstName || !lastName || !email || !address || !city || !country || !postalCode) {
+        alert('Please fill in all required fields');
+        return;
+    }
+
+    if (!termsChecked) {
+        alert('Please agree to the Terms and Conditions');
+        return;
+    }
+
+    // Generate a random order number
+    const randomOrderNumber = '#' + Math.floor(100000 + Math.random() * 900000);
+    
+    // Get current date
+    const today = new Date();
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const formattedDate = today.toLocaleDateString('en-US', options);
+    
+    // Get selected payment method
+    const selectedPayment = document.querySelector('input[name="payment"]:checked').id;
+    let paymentMethodDisplay = '';
+    
+    switch(selectedPayment) {
+        case 'credit-card':
+            paymentMethodDisplay = 'Credit / Debit Card';
+            break;
+        case 'paypal':
+            paymentMethodDisplay = 'PayPal';
+            break;
+        case 'mpesa':
+            paymentMethodDisplay = 'M-Pesa';
+            break;
+        case 'crypto':
+            paymentMethodDisplay = 'Cryptocurrency';
+            break;
+        case 'bank-transfer':
+            paymentMethodDisplay = 'Bank Transfer';
+            break;
+        default:
+            paymentMethodDisplay = 'Unknown';
+    }
+    
+    // Update confirmation details
+    orderNumber.textContent = randomOrderNumber;
+    orderDate.textContent = formattedDate;
+    orderTotal.textContent = cartTotal.textContent;
+    orderPaymentMethod.textContent = paymentMethodDisplay;
+    
+    // Show confirmation and hide checkout
+    checkoutSection.classList.add('hidden');
+    confirmationSection.classList.remove('hidden');
+    
+    // Clear the cart
+    cartItems.length = 0;
+    localStorage.removeItem('cartItems');
+    renderCart();
+    
+    // Scroll to confirmation
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
 
         // Initial render
         renderCart();
