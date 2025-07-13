@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Shopping Cart | Z Organic Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/9dbb72da13.js" crossorigin="anonymous"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        h2 {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .cart-animate-in {
+            animation: fadeInUp 0.5s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #15803d 0%, #166534 100%);
+            box-shadow: 0 4px 15px rgba(22, 101, 52, 0.25);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(22, 101, 52, 0.35);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+        }
+        
+        .select-arrow {
+            background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E");
+            background-position: right 0.75rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #15803d;
+            border-radius: 10px;
+        }
+        
+        .payment-method {
+            transition: all 0.2s ease;
+        }
+        
+        .payment-method:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .payment-method.selected {
+            border-color: #15803d;
+            background-color: #f0fdf4;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation Banner -->
+    <div class="bg-gradient-to-r from-green-800 to-green-700 py-3 px-6 text-center text-white">
+        <p class="text-sm"><i class="fas fa-truck mr-2"></i> Free shipping on all orders over KES 999</p>
+    </div>
+    
+    <!-- Cart Section -->
+    <section id="cart" class="py-24 bg-gray-50">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="flex justify-between items-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-900"><span class="text-green-700">Your</span> Shopping Cart</h2>
+                <div class="hidden sm:flex items-center space-x-2">
+                    <div class="w-2 h-2 rounded-full bg-green-600"></div>
+                    <div class="w-2 h-2 rounded-full bg-green-600 opacity-80"></div>
+                    <div class="w-2 h-2 rounded-full bg-green-600 opacity-60"></div>
+                    <div class="w-2 h-2 rounded-full bg-green-600 opacity-40"></div>
+                    <div class="w-2 h-2 rounded-full bg-green-600 opacity-20"></div>
+                </div>
+            </div>
+
+            <!-- If Cart is Empty -->
+            <div id="empty-cart" class="cart-animate-in bg-white rounded-xl shadow-sm p-12 text-center max-w-3xl mx-auto">
+                <div class="text-green-600 mb-6">
+                    <i class="fas fa-shopping-cart text-6xl opacity-40"></i>
+                </div>
+                <h3 class="text-2xl font-semibold text-gray-800 mb-3">Your cart is empty</h3>
+                <p class="text-gray-500 mb-8 max-w-md mx-auto">Looks like you haven't added anything to your cart yet. Let's get you started with some of our premium selections.</p>
+                <a href="products.html" class="btn-primary text-white px-8 py-4 rounded-full font-medium inline-flex items-center">
+                    Browse Products
+                    <i class="fas fa-chevron-right ml-2 text-sm"></i>
+                </a>
+            </div>
+
+            <!-- If Cart has Products -->
+            <div id="cart-items" class="cart-animate-in hidden">
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden mb-10">
+                    <div class="overflow-x-auto custom-scrollbar">
+                        <table class="w-full">
+                            <thead class="bg-gray-50">
+                                <tr class="border-b border-gray-200">
+                                    <th class="py-6 px-8 text-left font-medium text-gray-500 uppercase tracking-wider w-1/2">Product</th>
+                                    <th class="py-6 px-8 text-center font-medium text-gray-500 uppercase tracking-wider">Price</th>
+                                    <th class="py-6 px-8 text-center font-medium text-gray-500 uppercase tracking-wider">Quantity</th>
+                                    <th class="py-6 px-8 text-center font-medium text-gray-500 uppercase tracking-wider">Subtotal</th>
+                                    <th class="py-6 px-8 text-center font-medium text-gray-500 uppercase tracking-wider"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="cart-table-body">
+                                <!-- Dynamic Cart Items Render Here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Cart Summary -->
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-6 md:space-y-0">
+                    <div class="flex-1 max-w-md">
+                        <div class="bg-white p-6 rounded-xl shadow-sm">
+                            <h4 class="text-lg font-medium text-gray-800 mb-4">Have a coupon code?</h4>
+                            <div class="flex">
+                                <input type="text" placeholder="Enter coupon code" class="flex-1 px-4 py-3 border border-gray-200 rounded-l-lg focus:outline-none focus:ring-1 focus:ring-green-600">
+                                <button class="bg-gray-800 text-white px-6 py-3 rounded-r-lg hover:bg-gray-700 transition">Apply</button>
+                            </div>
+                        </div>
+                    </div>
+                                    
+                    <div class="w-full md:w-auto">
+                        <div class="bg-white p-8 rounded-xl shadow-sm w-full">
+                            <h4 class="text-xl font-semibold text-gray-900 mb-6">Order Summary</h4>
+                            <div class="space-y-4 mb-6">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Subtotal</span>
+                                    <span id="cart-subtotal" class="font-medium">KES 0.00</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Shipping</span>
+                                    <span class="font-medium">Free</span>
+                                </div>
+                                <div class="flex justify-between border-t border-gray-200 pt-4">
+                                    <span class="text-gray-900 font-semibold">Total</span>
+                                    <span id="cart-total" class="font-bold text-green-700">KES 0.00</span>
+                                </div>
+                            </div>
+                            
+                            <div class="flex flex-col space-y-4">
+                                <button onclick="window.location.href = sessionStorage.getItem('lastProductPage') || 'products.html';" class="btn-secondary text-gray-800 px-8 py-4 rounded-full font-medium">
+                                    Continue Shopping
+                                </button>
+                                <button id="checkout-button" class="btn-primary text-white px-8 py-4 rounded-full font-medium text-center">
+                                    Proceed to Secure Checkout
+                                    <i class="fas fa-lock ml-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Checkout Section -->
+    <section id="checkout" class="py-24 bg-gray-50 hidden">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <div class="flex justify-center mb-12">
+                <div class="w-20 h-1 bg-green-600 rounded-full"></div>
+            </div>
+                        
+            <div class="flex flex-col md:flex-row">
+                <!-- Checkout Steps Indicator -->
+                <div class="md:w-1/4 md:pr-8 mb-8 md:mb-0">
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-8 h-8 rounded-full bg-green-700 flex items-center justify-center text-white font-medium">1</div>
+                            <div>
+                                <p class="text-xs text-gray-400">STEP 1</p>
+                                <p class="text-sm font-medium">Shopping Cart</p>
+                            </div>
+                        </div>
+                                                
+                        <div class="flex items-center space-x-4">
+                            <div class="w-8 h-8 rounded-full bg-green-700 flex items-center justify-center text-white font-medium">2</div>
+                            <div>
+                                <p class="text-xs text-gray-400">STEP 2</p>
+                                <p class="text-sm font-medium text-green-700">Payment Method</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center space-x-4">
+                            <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 font-medium">3</div>
+                            <div>
+                                <p class="text-xs text-gray-400">STEP 3</p>
+                                <p class="text-sm font-medium text-gray-400">Order Confirmation</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                                
+                <!-- Checkout Form -->
+                <div class="md:w-3/4">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-8">Complete Your Order</h2>
+                                        
+                    <form class="space-y-6">
+                        <div class="bg-white p-8 rounded-xl shadow-sm">
+                            <h3 class="text-lg font-semibold text-gray-800 mb-6 pb-4 border-b border-gray-100">Contact Information</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+                                    <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-green-600" required>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+                                    <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-green-600" required>
+                                </div>
+                                <div class="md:col-span-2">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                                    <input type="email" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-green-600" required>
+                                </div>
+                            </div>
+                        </div>
+                                                
+                        <div class="bg-white p-8 rounded-xl shadow-sm">
+                            <h3 class="text-lg font-semibold text-gray-800 mb-6 pb-4 border-b border-gray-100">Shipping Address</h3>
+                            <div class="space-y-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Address</label>
+                                    <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-green-600" required>
+                                </div>
+                                                                
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">City</label>
+                                        <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-green-600" required>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Country</label>
+                                        <select class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-green-600 select-arrow" required>
+                                            <option value="">Select Country</option>
+                                            <option value="US">United States</option>
+                                            <option value="UK">United Kingdom</option>
+                                            <option value="CA">Canada</option>
+                                            <option value="AU">Australia</option>
+                                            <option value="KE" selected>Kenya</option>
+                                            <option value="NG">Nigeria</option>
+                                            <option value="ZA">South Africa</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Postal Code</label>
+                                        <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-green-600" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                                
+                        <div class="bg-white p-8 rounded-xl shadow-sm">
+                            <h3 class="text-lg font-semibold text-gray-800 mb-6 pb-4 border-b border-gray-100">Payment Method</h3>
+                            <div class="space-y-4">
+                                <div id="credit-card-option" class="payment-method rounded-lg border border-gray-200 p-4 hover:border-green-500 cursor-pointer selected">
+                                    <div class="flex items-center space-x-4">
+                                        <input type="radio" name="payment" id="credit-card" class="h-4 w-4 text-green-600 focus:ring-green-500" checked>
+                                        <label for="credit-card" class="flex-1">
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-sm font-medium text-gray-700">Credit / Debit Card</span>
+                                                <div class="flex space-x-2">
+                                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/visa/visa-original.svg" class="h-6" alt="Visa">
+                                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mastercard/mastercard-original.svg" class="h-6" alt="Mastercard">
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                                                                
+                                <div id="paypal-option" class="payment-method rounded-lg border border-gray-200 p-4 hover:border-green-500 cursor-pointer">
+                                    <div class="flex items-center space-x-4">
+                                        <input type="radio" name="payment" id="paypal" class="h-4 w-4 text-green-600 focus:ring-green-500">
+                                        <label for="paypal" class="flex-1">
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-sm font-medium text-gray-700">PayPal</span>
+                                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/paypal/paypal-original.svg" class="h-6" alt="PayPal">
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div id="mpesa-option" class="payment-method rounded-lg border border-gray-200 p-4 hover:border-green-500 cursor-pointer">
+                                    <div class="flex items-center space-x-4">
+                                        <input type="radio" name="payment" id="mpesa" class="h-4 w-4 text-green-600 focus:ring-green-500">
+                                        <label for="mpesa" class="flex-1">
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-sm font-medium text-gray-700">M-Pesa</span>
+                                                <img src="https://upload.wikimedia.org/wikipedia/commons/1/15/M-PESA_LOGO-01.svg" class="h-6" alt="M-Pesa">
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div id="crypto-option" class="payment-method rounded-lg border border-gray-200 p-4 hover:border-green-500 cursor-pointer">
+                                    <div class="flex items-center space-x-4">
+                                        <input type="radio" name="payment" id="crypto" class="h-4 w-4 text-green-600 focus:ring-green-500">
+                                        <label for="crypto" class="flex-1">
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-sm font-medium text-gray-700">Cryptocurrency</span>
+                                                <div class="flex space-x-2">
+                                                    <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.svg" class="h-6" alt="Bitcoin">
+                                                    <img src="https://cryptologos.cc/logos/ethereum-eth-logo.svg" class="h-6" alt="Ethereum">
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div id="bank-transfer-option" class="payment-method rounded-lg border border-gray-200 p-4 hover:border-green-500 cursor-pointer">
+                                    <div class="flex items-center space-x-4">
+                                        <input type="radio" name="payment" id="bank-transfer" class="h-4 w-4 text-green-600 focus:ring-green-500">
+                                        <label for="bank-transfer" class="flex-1">
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-sm font-medium text-gray-700">Bank Transfer</span>
+                                                <img src="https://cdn-icons-png.flaticon.com/512/2875/2875334.png" class="h-6" alt="Bank">
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                                                
+                            <div id="credit-card-details" class="mt-6 space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Card Number</label>
+                                    <input type="text" placeholder="1234 5678 9012 3456" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-green-600" required>
+                                </div>
+                                                                
+                                <div class="grid grid-cols-2 gap-6">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Expiration Date</label>
+                                        <input type="text" placeholder="MM/YY" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-green-600" required>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Security Code</label>
+                                        <input type="text" placeholder="CVV" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-green-600" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="mpesa-details" class="mt-6 space-y-4 hidden">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                                    <input type="text" placeholder="e.g., 2547XXXXXXXX" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-green-600">
+                                </div>
+                                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+                                    <div class="flex">
+                                        <div class="flex-shrink-0">
+                                            <i class="fas fa-info-circle text-yellow-400"></i>
+                                        </div>
+                                        <div class="ml-3">
+                                            <p class="text-sm text-yellow-700">
+                                                You'll receive an M-Pesa prompt on your phone to complete payment.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="crypto-details" class="mt-6 space-y-4 hidden">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Select Cryptocurrency</label>
+                                    <select class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-green-600 select-arrow">
+                                        <option value="">Select Coin</option>
+                                        <option value="BTC">Bitcoin (BTC)</option>
+                                        <option value="ETH">Ethereum (ETH)</option>
+                                        <option value="USDT">Tether (USDT)</option>
+                                        <option value="SOL">Solana (SOL)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <div class="bg-gray-800 rounded-lg p-4 text-center">
+                                        <div class="flex justify-center mb-4">
+                                            <img src="https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=bitcoin:3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5" alt="QR Code" class="h-40 w-40">
+                                        </div>
+                                        <p class="text-xs text-gray-400 mb-2">Scan or copy the address below:</p>
+                                        <div class="bg-gray-700 rounded p-2 flex items-center justify-between">
+                                            <p class="text-sm text-white font-mono truncate">3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                            <button class="text-gray-400 hover:text-white ml-2">
+                                                <i class="far fa-copy"></i>
+                                            </button>
+                                        </div>
+                                        <p class="text-xs text-gray-400 mt-2">Your crypto payment will be automatically verified.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                                
+                        <div class="flex items-center">
+                            <input id="terms" type="checkbox" class="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded" required>
+                            <label for="terms" class="ml-2 block text-sm text-gray-700">
+                                I agree to the <a href="#" class="text-green-600 hover:text-green-700">Terms and Conditions</a> and <a href="#" class="text-green-600 hover:text-green-700">Privacy Policy</a>
+                            </label>
+                        </div>
+                                                
+                        <button type="submit" class="btn-primary text-white w-full py-5 rounded-full font-medium text-lg flex items-center justify-center">
+                            Complete Order
+                            <i class="fas fa-chevron-right ml-2 text-sm"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Confirmation Section -->
+    <section id="confirmation" class="py-24 bg-gray-50 hidden">
+        <div class="container mx-auto px-6 max-w-2xl">
+            <div class="flex justify-center mb-12">
+                <div class="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center">
+                    <i class="fas fa-check-circle text-4xl text-green-600"></i>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Order Confirmed!</h2>
+                <p class="text-lg text-gray-600 mb-8">Thank you for your purchase. Your order has been received and is being processed.</p>
+                
+                <div class="bg-white rounded-xl shadow-sm p-8 mb-8">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Order Details</h3>
+                    
+                    <div class="space-y-4">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Order Number</span>
+                            <span class="font-medium" id="order-number"></span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Date</span>
+                            <span class="font-medium" id="order-date"></span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Total</span>
+                            <span class="font-bold text-green-700" id="order-total"></span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Payment Method</span>
+                            <span class="font-medium" id="order-payment-method"></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="text-gray-500 mb-6">We've sent a confirmation email with your order details. You'll receive another email when your order ships.</p>
+                
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <button onclick="window.location.href = 'products.html';" class="btn-secondary text-gray-800 px-8 py-4 rounded-full font-medium">
+                        Continue Shopping
+                    </button>
+                    <button class="btn-primary text-white px-8 py-4 rounded-full font-medium text-center">
+                        View Order Details
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Company</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition">Careers</a></li>
+                        <li><a href="#" class="hover:text-white transition">Blog</a></li>
+                        <li><a href="#" class="hover:text-white transition">Press</a></li>
+                    </ul>
+                </div>
+                                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Customer Service</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-white transition">FAQs</a></li>
+                        <li><a href="#" class="hover:text-white transition">Returns</a></li>
+                        <li><a href="#" class="hover:text-white transition">Shipping Info</a></li>
+                    </ul>
+                </div>
+                                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Shop</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="products.html" class="hover:text-white transition">Products</a></li>
+                        <li><a href="#" class="hover:text-white transition">Best Sellers</a></li>
+                        <li><a href="#" class="hover:text-white transition">Gift Cards</a></li>
+                        <li><a href="#" class="hover:text-white transition">Sale</a></li>
+                    </ul>
+                </div>
+                                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Connect With Us</h3>
+                    <div class="flex space-x-4 mb-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-green-600 transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-green-600 transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-green-600 transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-green-600 transition">
+                            <i class="fab fa-pinterest-p"></i>
+                        </a>
+                    </div>
+                    <p class="text-sm text-gray-400">Subscribe to our newsletter for updates</p>
+                    <div class="mt-2 flex">
+                        <input type="email" placeholder="Your email" class="flex-1 px-4 py-2 bg-gray-800 border border-gray-700 rounded-l focus:outline-none focus:ring-1 focus:ring-green-600">
+                        <button class="bg-green-600 px-4 py-2 rounded-r hover:bg-green-700 transition">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+                    
+            <div class="border-t border-gray-800 pt-8 text-sm text-gray-400">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p>© 2023 Z Organic Solutions. All rights reserved.</p>
+                    <div class="flex space-x-6 mt-4 md:mt-0">
+                        <a href="#" class="hover:text-white transition">Privacy Policy</a>
+                        <a href="#" class="hover:text-white transition">Terms of Service</a>
+                        <a href="#" class="hover:text-white transition">Sitemap</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Cart functionality
+        // Load cart items from localStorage or initialize empty array
+        let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        let subtotal = 0;
+
+        // DOM Elements
+        const emptyCart = document.getElementById('empty-cart');
+        const cartItemsSection = document.getElementById('cart-items');
+        const cartTableBody = document.getElementById('cart-table-body');
+        const cartTotal = document.getElementById('cart-total');
+        const cartSubtotal = document.getElementById('cart-subtotal');
+        const checkoutSection = document.getElementById('checkout');
+        const confirmationSection = document.getElementById('confirmation');
+        const checkoutButton = document.getElementById('checkout-button');
+
+        // Payment method options
+        const paymentOptions = document.querySelectorAll('.payment-method');
+        const creditCardDetails = document.getElementById('credit-card-details');
+        const mpesaDetails = document.getElementById('mpesa-details');
+        const cryptoDetails = document.getElementById('crypto-details');
+
+        // Order confirmation elements
+        const orderNumber = document.getElementById('order-number');
+        const orderDate = document.getElementById('order-date');
+        const orderTotal = document.getElementById('order-total');
+        const orderPaymentMethod = document.getElementById('order-payment-method');
+
+        // Demo: Store last visited product page
+        if (!sessionStorage.getItem('lastProductPage')) {
+            sessionStorage.setItem('lastProductPage', 'products.html');
+        }
+
+        // Render Cart
+        function renderCart() {
+            if (cartItems.length === 0) {
+                emptyCart.classList.remove('hidden');
+                cartItemsSection.classList.add('hidden');
+            } else {
+                emptyCart.classList.add('hidden');
+                cartItemsSection.classList.remove('hidden');
+
+                cartTableBody.innerHTML = '';
+                subtotal = 0;
+
+                cartItems.forEach((item, index) => {
+                    subtotal += item.price * item.quantity;
+
+                    cartTableBody.innerHTML += `
+                        <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
+                            <td class="py-6 px-8">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-20 w-20 mr-6">
+                                        <img class="h-full w-full rounded object-cover" src="${item.image}" alt="${item.name}">
+                                    </div>
+                                    <div>
+                                        <h4 class="text-gray-900 font-medium">${item.name}</h4>
+                                        <p class="text-gray-500 text-sm">SKU: ${item.sku || Math.floor(1000 + Math.random() * 9000)}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-6 px-8 text-center font-medium text-gray-900">KES ${item.price.toFixed(2)}</td>
+                            <td class="py-6 px-8 text-center">
+                                <div class="flex items-center justify-center">
+                                    <button onclick="updateQuantity(${index}, -1)" class="w-8 h-8 flex items-center justify-center border border-gray-200 rounded-l hover:bg-gray-100 transition">
+                                        <i class="fas fa-minus text-xs text-gray-500"></i>
+                                    </button>
+                                    <span class="w-12 h-8 flex items-center justify-center border-t border-b border-gray-200 text-sm">
+                                        ${item.quantity}
+                                    </span>
+                                    <button onclick="updateQuantity(${index}, 1)" class="w-8 h-8 flex items-center justify-center border border-gray-200 rounded-r hover:bg-gray-100 transition">
+                                        <i class="fas fa-plus text-xs text-gray-500"></i>
+                                    </button>
+                                </div>
+                            </td>
+                            <td class="py-6 px-8 text-center font-medium text-gray-900">KES ${(item.price * item.quantity).toFixed(2)}</td>
+                            <td class="py-6 px-8 text-center">
+                                <button onclick="removeFromCart(${index})" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition text-gray-500 hover:text-red-500">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>`;
+                });
+
+                cartSubtotal.textContent = `KES ${subtotal.toFixed(2)}`;
+                cartTotal.textContent = `KES ${subtotal.toFixed(2)}`;
+            }
+        }
+
+        // Update Quantity
+        function updateQuantity(index, change) {
+            const newQuantity = cartItems[index].quantity + change;
+            if (newQuantity > 0) {
+                cartItems[index].quantity = newQuantity;
+                localStorage.setItem('cartItems', JSON.stringify(cartItems));
+                renderCart();
+            }
+        }
+
+        // Remove Item
+        function removeFromCart(index) {
+            cartItems.splice(index, 1);
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            renderCart();
+
+            // Show empty cart animation if needed
+            if (cartItems.length === 0) {
+                emptyCart.classList.remove('hidden');
+                emptyCart.classList.add('cart-animate-in');
+            }
+        }
+
+        // Checkout Trigger (show checkout form)
+        checkoutButton.addEventListener('click', e => {
+            if (cartItems.length > 0) {
+                checkoutSection.classList.remove('hidden');
+                // Hide cart section
+                document.getElementById('cart').classList.add('hidden');
+                
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+        });
+
+        // Payment method selection
+        paymentOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                // Remove selected class from all options
+                paymentOptions.forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                
+                // Add selected class to clicked option
+                this.classList.add('selected');
+                
+                // Get the radio input inside this option and check it
+                const radio = this.querySelector('input[type="radio"]');
+                radio.checked = true;
+                
+                // Show/hide payment method details
+                const methodId = radio.id;
+                
+                creditCardDetails.classList.add('hidden');
+                mpesaDetails.classList.add('hidden');
+                cryptoDetails.classList.add('hidden');
+                
+                if (methodId === 'credit-card') {
+                    creditCardDetails.classList.remove('hidden');
+                } else if (methodId === 'mpesa') {
+                    mpesaDetails.classList.remove('hidden');
+                } else if (methodId === 'crypto') {
+                    cryptoDetails.classList.remove('hidden');
+                }
+            });
+        });
+
+        // Form submission for checkout
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Generate a random order number
+            const randomOrderNumber = '#' + Math.floor(100000 + Math.random() * 900000);
+            
+            // Get current date
+            const today = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            const formattedDate = today.toLocaleDateString('en-US', options);
+            
+            // Get selected payment method
+            const selectedPayment = document.querySelector('input[name="payment"]:checked').id;
+            let paymentMethodDisplay = '';
+            
+            switch(selectedPayment) {
+                case 'credit-card':
+                    paymentMethodDisplay = 'Credit / Debit Card';
+                    break;
+                case 'paypal':
+                    paymentMethodDisplay = 'PayPal';
+                    break;
+                case 'mpesa':
+                    paymentMethodDisplay = 'M-Pesa';
+                    break;
+                case 'crypto':
+                    paymentMethodDisplay = 'Cryptocurrency';
+                    break;
+                case 'bank-transfer':
+                    paymentMethodDisplay = 'Bank Transfer';
+                    break;
+                default:
+                    paymentMethodDisplay = 'Unknown';
+            }
+            
+            // Update confirmation details
+            orderNumber.textContent = randomOrderNumber;
+            orderDate.textContent = formattedDate;
+            orderTotal.textContent = cartTotal.textContent;
+            orderPaymentMethod.textContent = paymentMethodDisplay;
+            
+            // Show confirmation and hide checkout
+            checkoutSection.classList.add('hidden');
+            confirmationSection.classList.remove('hidden');
+            
+            // Clear the cart
+            cartItems.length = 0;
+            localStorage.removeItem('cartItems');
+            renderCart();
+            
+            // Scroll to confirmation
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Initial render
+        renderCart();
+    </script>
+</body>
+</html>
