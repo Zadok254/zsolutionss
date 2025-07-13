@@ -2,74 +2,569 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Our Farms | Z Solutions</title>
-  <link rel="stylesheet" href="css/farms.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Global Farm Network | Z Solutions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2a5d34;
+      --secondary: #5b8c5a;
+      --accent: #d4a762;
+      --light: #f8f8f5;
+      --dark: #1a1a1a;
+      --text: #333333;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Lato', sans-serif;
+      color: var(--text);
+      background-color: var(--light);
+      line-height: 1.6;
+    }
+    
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    /* Header Styles */
+    .farm-header {
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                  url('https://source.unsplash.com/1600x900/?farms,world') center/cover no-repeat;
+      color: white;
+      text-align: center;
+      padding: 100px 20px;
+      margin-bottom: 60px;
+    }
+    
+    .farm-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    
+    .farm-header p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    /* Filter Controls */
+    .farm-filters {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 40px;
+    }
+    
+    .filter-btn {
+      padding: 10px 20px;
+      background: white;
+      border: 1px solid var(--primary);
+      color: var(--primary);
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      text-decoration: none;
+    }
+    
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--primary);
+      color: white;
+    }
+    
+    /* Farm Grid */
+    .farm-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+    
+    .farm-card {
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .farm-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+    
+    .farm-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+    
+    .farm-details {
+      padding: 25px;
+    }
+    
+    .farm-details h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: var(--primary);
+    }
+    
+    .farm-location {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      color: var(--secondary);
+    }
+    
+    .farm-location svg {
+      margin-right: 8px;
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+    
+    .farm-description {
+      margin-bottom: 20px;
+      color: var(--text);
+    }
+    
+    .farm-specs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    
+    .badge {
+      display: inline-block;
+      padding: 5px 12px;
+      background: var(--accent);
+      color: white;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+    
+    /* Map Section */
+    .map-section {
+      margin: 80px 0;
+      text-align: center;
+    }
+    
+    .map-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      margin-bottom: 30px;
+      color: var(--primary);
+    }
+    
+    .world-map {
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+      position: relative;
+    }
+    
+    .world-map img {
+      width: 100%;
+      height: auto;
+    }
+    
+    /* Stats Section */
+    .stats-section {
+      background: var(--primary);
+      color: white;
+      padding: 60px 0;
+      text-align: center;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      margin-top: 40px;
+    }
+    
+    .stat-item h3 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--accent);
+    }
+    
+    .stat-item p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 40px 0;
+      text-align: center;
+    }
+    
+    /* Hidden class for filtering */
+    .hidden {
+      display: none;
+    }
+    
+    @media (max-width: 768px) {
+      .farm-header h1 {
+        font-size: 2.5rem;
+      }
+      
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .farm-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
 
   <header class="farm-header">
-    <h1>🌾 Our Organic Farms</h1>
-    <p>Trusted farming excellence across 77 branches worldwide</p>
+    <div class="container">
+      <h1>Our Global Farm Network</h1>
+      <p>77+ certified organic farms across 6 continents, delivering sustainable agriculture solutions worldwide</p>
+    </div>
   </header>
 
-  <section class="farm-grid">
-    <!-- Example Farms -->
-    <div class="farm-card">
-      <img src="https://source.unsplash.com/400x300/?farm,organic" alt="Nairobi Farm">
-      <div class="farm-details">
-        <h3>Nairobi HQ Farm</h3>
-        <p>📍 Nairobi, Kenya</p>
-        <span class="badge">Organic Certified</span>
-      </div>
+  <main class="container">
+    <div class="farm-filters">
+      <a href="#all" class="filter-btn active" data-filter="all">All Farms</a>
+      <a href="#dairy" class="filter-btn" data-filter="dairy">Dairy</a>
+      <a href="#poultry" class="filter-btn" data-filter="poultry">Poultry</a>
+      <a href="#crops" class="filter-btn" data-filter="crops">Crops</a>
+      <a href="#greenhouses" class="filter-btn" data-filter="greenhouses">Greenhouses</a>
+      <a href="#research" class="filter-btn" data-filter="research">Research</a>
     </div>
 
-    <div class="farm-card">
-      <img src="https://source.unsplash.com/400x300/?poultry,africa" alt="Kisumu Poultry">
-      <div class="farm-details">
-        <h3>Kisumu Poultry Farm</h3>
-        <p>📍 Kisumu, Kenya</p>
-        <span class="badge">Free-range Poultry</span>
+    <section class="farm-grid">
+      <!-- Africa Region -->
+      <div class="farm-card" data-category="research crops">
+        <img src="https://source.unsplash.com/600x400/?farm,kenya" alt="Nairobi Farm">
+        <div class="farm-details">
+          <h3>Nairobi HQ Farm</h3>
+          <div class="farm-location">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z"/></svg>
+            <span>Nairobi, Kenya</span>
+          </div>
+          <p class="farm-description">Our flagship 500-acre organic farm specializing in diverse crop rotation including coffee, tea, and macadamia nuts. Features an on-site research center for sustainable farming techniques.</p>
+          <div class="farm-specs">
+            <span class="badge">Organic Certified</span>
+            <span class="badge">Research Facility</span>
+            <span class="badge">Since 1985</span>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <div class="farm-card">
-      <img src="https://source.unsplash.com/400x300/?cows,dairy" alt="Eldoret Dairy">
-      <div class="farm-details">
-        <h3>Eldoret Dairy Farm</h3>
-        <p>📍 Eldoret, Kenya</p>
-        <span class="badge">Fresh Organic Milk</span>
+      <div class="farm-card" data-category="poultry">
+        <img src="https://source.unsplash.com/600x400/?poultry,farm" alt="Kisumu Poultry">
+        <div class="farm-details">
+          <h3>Kisumu Poultry Farm</h3>
+          <div class="farm-location">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z"/></svg>
+            <span>Kisumu, Kenya</span>
+          </div>
+          <p class="farm-description">State-of-the-art free-range poultry operation producing 50,000 organic eggs weekly. Features automated climate-controlled coops and ethical animal welfare standards.</p>
+          <div class="farm-specs">
+            <span class="badge">Free-range</span>
+            <span class="badge">Ethical Certified</span>
+            <span class="badge">Egg Production</span>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <div class="farm-card">
-      <img src="https://source.unsplash.com/400x300/?vegetables,organic" alt="Ghana Farm">
-      <div class="farm-details">
-        <h3>Accra Urban Garden</h3>
-        <p>📍 Accra, Ghana</p>
-        <span class="badge">Urban Organic Crops</span>
+      <div class="farm-card" data-category="dairy">
+        <img src="https://source.unsplash.com/600x400/?dairy,cows" alt="Eldoret Dairy">
+        <div class="farm-details">
+          <h3>Eldoret Dairy Farm</h3>
+          <div class="farm-location">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z"/></svg>
+            <span>Eldoret, Kenya</span>
+          </div>
+          <p class="farm-description">500-head dairy operation producing premium organic milk and artisan cheeses. Features robotic milking systems and methane capture technology for sustainable operations.</p>
+          <div class="farm-specs">
+            <span class="badge">Dairy</span>
+            <span class="badge">Carbon Neutral</span>
+            <span class="badge">Cheese Production</span>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <div class="farm-card">
-      <img src="https://source.unsplash.com/400x300/?farmers,india" alt="India Farm">
-      <div class="farm-details">
-        <h3>Punjab Wheat Farm</h3>
-        <p>📍 Punjab, India</p>
-        <span class="badge">Heritage Wheat</span>
+      <div class="farm-card" data-category="crops greenhouses">
+        <img src="https://source.unsplash.com/600x400/?vegetables,ghana" alt="Ghana Farm">
+        <div class="farm-details">
+          <h3>Accra Urban Garden</h3>
+          <div class="farm-location">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z"/></svg>
+            <span>Accra, Ghana</span>
+          </div>
+          <p class="farm-description">Innovative vertical farming operation supplying fresh organic produce to urban markets. Specializes in leafy greens and herbs using hydroponic systems with 90% water savings.</p>
+          <div class="farm-specs">
+            <span class="badge">Urban Farming</span>
+            <span class="badge">Hydroponic</span>
+            <span class="badge">Year-round</span>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <div class="farm-card">
-      <img src="https://source.unsplash.com/400x300/?greenhouse,vegetables" alt="USA Farm">
-      <div class="farm-details">
-        <h3>California Greenhouse</h3>
-        <p>📍 California, USA</p>
-        <span class="badge">Export-Grade Vegetables</span>
+      <!-- Asia Region -->
+      <div class="farm-card" data-category="crops">
+        <img src="https://source.unsplash.com/600x400/?wheat,india" alt="India Farm">
+        <div class="farm-details">
+          <h3>Punjab Wheat Farm</h3>
+          <div class="farm-location">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z"/></svg>
+            <span>Punjab, India</span>
+          </div>
+          <p class="farm-description">2,000-acre heritage wheat farm preserving ancient grain varieties. Uses regenerative agriculture practices to restore soil health while producing premium organic flour.</p>
+          <div class="farm-specs">
+            <span class="badge">Heritage Grains</span>
+            <span class="badge">Regenerative</span>
+            <span class="badge">Soil Health</span>
+          </div>
+        </div>
       </div>
+
+      <div class="farm-card" data-category="crops">
+        <img src="https://source.unsplash.com/600x400/?tea,china" alt="China Farm">
+        <div class="farm-details">
+          <h3>Yunnan Tea Estate</h3>
+          <div class="farm-location">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z"/></svg>
+            <span>Yunnan, China</span>
+          </div>
+          <p class="farm-description">Centuries-old tea terraces producing premium organic pu-erh and green teas. Combines traditional methods with modern organic certification for international markets.</p>
+          <div class="farm-specs">
+            <span class="badge">Tea Production</span>
+            <span class="badge">Fair Trade</span>
+            <span class="badge">Heritage Site</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Americas Region -->
+      <div class="farm-card" data-category="greenhouses crops">
+        <img src="https://source.unsplash.com/600x400/?greenhouse,vegetables" alt="USA Farm">
+        <div class="farm-details">
+          <h3>California Greenhouse Complex</h3>
+          <div class="farm-location">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z"/></svg>
+            <span>Salinas Valley, USA</span>
+          </div>
+          <p class="farm-description">25-acre high-tech greenhouse facility producing export-grade organic vegetables year-round. Features automated climate control and water recycling systems.</p>
+          <div class="farm-specs">
+            <span class="badge">Export Quality</span>
+            <span class="badge">Year-round</span>
+            <span class="badge">High-tech</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="farm-card" data-category="crops">
+        <img src="https://source.unsplash.com/600x400/?coffee,brazil" alt="Brazil Farm">
+        <div class="farm-details">
+          <h3>Minas Gerais Coffee Farm</h3>
+          <div class="farm-location">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z"/></svg>
+            <span>Minas Gerais, Brazil</span>
+          </div>
+          <p class="farm-description">Shade-grown organic coffee plantation producing specialty grade beans. Maintains biodiversity corridors for native wildlife while producing premium arabica coffee.</p>
+          <div class="farm-specs">
+            <span class="badge">Specialty Coffee</span>
+            <span class="badge">Bird Friendly</span>
+            <span class="badge">Shade Grown</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Europe Region -->
+      <div class="farm-card" data-category="crops">
+        <img src="https://source.unsplash.com/600x400/?vineyard,france" alt="France Farm">
+        <div class="farm-details">
+          <h3>Bordeaux Vineyard</h3>
+          <div class="farm-location">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z"/></svg>
+            <span>Bordeaux, France</span>
+          </div>
+          <p class="farm-description">Historic organic vineyard producing biodynamic wines. Combines centuries-old winemaking traditions with modern organic certification for premium vintages.</p>
+          <div class="farm-specs">
+            <span class="badge">Biodynamic</span>
+            <span class="badge">Wine Production</span>
+            <span class="badge">AOC Certified</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="farm-card" data-category="dairy">
+        <img src="https://source.unsplash.com/600x400/?cheese,netherlands" alt="Netherlands Farm">
+        <div class="farm-details">
+          <h3>Dutch Dairy Cooperative</h3>
+          <div class="farm-location">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z"/></svg>
+            <span>Friesland, Netherlands</span>
+          </div>
+          <p class="farm-description">Cooperative of 150 small organic dairy farms producing premium cheeses and dairy products. Features traditional Dutch farming methods with modern sustainability practices.</p>
+          <div class="farm-specs">
+            <span class="badge">Cooperative</span>
+            <span class="badge">Artisan Cheese</span>
+            <span class="badge">Carbon Neutral</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Australia Region -->
+      <div class="farm-card" data-category="research">
+        <img src="https://source.unsplash.com/600x400/?sheep,australia" alt="Australia Farm">
+        <div class="farm-details">
+          <h3>New South Wales Wool Farm</h3>
+          <div class="farm-location">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z"/></svg>
+            <span>New South Wales, Australia</span>
+          </div>
+          <p class="farm-description">10,000-acre merino sheep station producing premium organic wool. Features regenerative grazing practices and wildlife conservation programs across the property.</p>
+          <div class="farm-specs">
+            <span class="badge">Merino Wool</span>
+            <span class="badge">Regenerative</span>
+            <span class="badge">Wildlife Corridors</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Additional farms would be added here following the same pattern -->
+      <!-- Each would have the appropriate data-category attribute -->
+    </section>
+
+    <section class="map-section">
+      <h2>Our Global Presence</h2>
+      <div class="world-map">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg" alt="World map with farm locations">
+        <!-- In a real implementation, you would add markers for each farm location -->
+      </div>
+    </section>
+
+    <section class="stats-section">
+      <div class="container">
+        <h2>By The Numbers</h2>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <h3>77+</h3>
+            <p>Farms Worldwide</p>
+          </div>
+          <div class="stat-item">
+            <h3>42</h3>
+            <p>Countries</p>
+          </div>
+          <div class="stat-item">
+            <h3>6</h3>
+            <p>Continents</p>
+          </div>
+          <div class="stat-item">
+            <h3>35+</h3>
+            <p>Years Experience</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2023 Z Solutions Organic Farms. All rights reserved.</p>
+      <p>Sustainable agriculture for a healthier planet.</p>
     </div>
+  </footer>
 
-    <!-- You can add more farms here -->
-  </section>
-
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const farmCards = document.querySelectorAll('.farm-card');
+      
+      // Get filter from URL hash if present
+      const hash = window.location.hash.substring(1);
+      let activeFilter = hash || 'all';
+      
+      // Set initial active button based on hash or default to 'all'
+      document.querySelector(`.filter-btn[data-filter="${activeFilter}"]`).classList.add('active');
+      
+      // Filter farms based on initial active filter
+      filterFarms(activeFilter);
+      
+      // Add click event listeners to filter buttons
+      filterButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          // Remove active class from all buttons
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          
+          // Add active class to clicked button
+          this.classList.add('active');
+          
+          // Get filter from data attribute
+          const filter = this.getAttribute('data-filter');
+          
+          // Update URL hash
+          window.location.hash = filter;
+          
+          // Filter farms
+          filterFarms(filter);
+        });
+      });
+      
+      // Function to filter farms
+      function filterFarms(filter) {
+        farmCards.forEach(card => {
+          if (filter === 'all') {
+            card.classList.remove('hidden');
+          } else {
+            const categories = card.getAttribute('data-category').split(' ');
+            if (categories.includes(filter)) {
+              card.classList.remove('hidden');
+            } else {
+              card.classList.add('hidden');
+            }
+          }
+        });
+      }
+      
+      // Handle back/forward navigation
+      window.addEventListener('hashchange', function() {
+        const newHash = window.location.hash.substring(1);
+        if (newHash !== activeFilter) {
+          activeFilter = newHash || 'all';
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          document.querySelector(`.filter-btn[data-filter="${activeFilter}"]`).classList.add('active');
+          filterFarms(activeFilter);
+        }
+      });
+    });
+  </script>
 </body>
 </html>
